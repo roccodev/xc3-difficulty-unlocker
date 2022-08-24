@@ -34,6 +34,12 @@ Here are the default values for each difficulty:
 | Interlink level buildup speed | 125% | **100%** | 75% | 50% | 25->250%, x10 |
 | Interlink heat buildup speed | 75% | **100%** | 125% | 125% | 25->250%, x10 |
 
+## Build instructions
+To build the project, install [Rust](https://rustup.rs/) and run
+```sh
+./build.sh
+```
+
 ## License
 This mod is distributed under the terms of the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html). See [COPYING](COPYING) for details.
 
