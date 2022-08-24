@@ -7,18 +7,14 @@ use skyline::{
     hooks::InlineCtx,
     nn::{self, oe::DisplayVersion},
 };
-use std::sync::LazyLock;
-use std::{ffi::CStr, ops::Deref};
+use std::ffi::CStr;
+use std::sync::OnceLock;
 
 use crate::config::Config;
 
 mod config;
 
-static CONFIG: LazyLock<Config> = LazyLock::new(|| {
-    std::fs::read_to_string("rom:/difficulty/config.toml")
-        .map(|f| toml::from_str(&f).unwrap_or_default())
-        .unwrap_or_default()
-});
+static CONFIG: OnceLock<Config> = OnceLock::new();
 
 const OPTION_OFFSETS: [isize; 11] = [
     0x168, 0x16c, 0x170, 0x174, 0x178, 0x17c, 0x180, 0x184, 0x190, 0x188, 0x18c,
@@ -26,12 +22,12 @@ const OPTION_OFFSETS: [isize; 11] = [
 
 #[hook(offset = 0x0018ee24, inline)]
 unsafe fn load_set_difficulty_hook(ctx: &mut InlineCtx) {
-    replace_difficulty(ctx, 20);
+    replace_difficulty(ctx, 20, get_config());
 }
 
 #[hook(offset = 0x0018f030, inline)]
 unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
-    let custom = &CONFIG.custom;
+    let custom = &get_config().custom;
     if custom.enabled {
         let base_ptr = *ctx.registers[19].x.as_ref() as *mut u8;
         let set_f32 = |idx, val: u32| {
@@ -55,14 +51,15 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
 
 #[hook(offset = 0x0026b038, inline)]
 unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
-    if CONFIG.very_hard.health {
-        replace_difficulty(ctx, 0);
+    let config = get_config();
+    if config.very_hard.health {
+        replace_difficulty(ctx, 0, config);
     }
 }
 
 #[hook(offset = 0x0026b078, inline)]
 unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
-    let custom = &CONFIG.custom;
+    let custom = &get_config().custom;
     if custom.enabled {
         let original_health = *ctx.registers[20].w.as_ref();
 
@@ -92,10 +89,13 @@ pub fn main() {
         }
     }
 
-    LazyLock::force(&CONFIG);
+    let config = std::fs::read_to_string("rom:/difficulty/config.toml")
+        .map(|f| toml::de::from_str(&f).unwrap_or_default())
+        .unwrap_or_default();
+    CONFIG.set(config).unwrap();
 
     #[cfg(debug_assertions)]
-    println!("Loaded config {:#?}", CONFIG.deref());
+    println!("Loaded config {:#?}", get_config());
 
     println!("[XC3-DU] Installing hooks");
     skyline::install_hooks!(
@@ -108,14 +108,18 @@ pub fn main() {
     println!("[XC3-DU] Loaded!");
 }
 
+fn get_config() -> &'static Config {
+    CONFIG.get().unwrap()
+}
+
 fn percent_multiple_of_25(int: u32) -> f32 {
     let clamped = (((int + 24) / 25) * 25).max(25).min(250);
     clamped as f32 * 0.01
 }
 
-unsafe fn replace_difficulty(ctx: &mut InlineCtx, register: usize) {
+unsafe fn replace_difficulty(ctx: &mut InlineCtx, register: usize, config: &Config) {
     let difficulty_ptr = ctx.registers[register].w.as_mut();
-    let very_hard_config = &CONFIG.very_hard;
+    let very_hard_config = &config.very_hard;
 
     if very_hard_config.enabled && very_hard_config.overwrite == Difficulty::from(*difficulty_ptr) {
         *difficulty_ptr = Difficulty::VeryHard as u32;
