@@ -2,6 +2,9 @@
 This mod acts as a replacement for custom difficulty settings in Xenoblade 3, until we get an official solution.  
 Additionally, it also allows you to select the hidden "Very Hard" difficulty that's left in the game's files.
 
+> **Important**: While this mod does not deal with persistent data, you are still using it at your own risk. I am
+not responsible for anything that could happen to your saves, game, console, account, etc.
+
 ## Installation
 
 #### Switch
