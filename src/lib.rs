@@ -42,7 +42,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
         set_f32(5, custom.talent_buildup);
         set_f32(6, custom.player_healing);
         set_f32(7, custom.chain_damage_ratio);
-        set_f32(9, custom.reaction_chance);
+        set_f32(9, custom.interlink_level_buildup);
         set_f32(10, custom.interlink_heat_buildup);
 
         *(base_ptr.offset(OPTION_OFFSETS[8])) = custom.rage_strikes as u8;
@@ -89,7 +89,7 @@ pub fn main() {
         }
     }
 
-    let config = std::fs::read_to_string("rom:/difficulty/config.toml")
+    let config = std::fs::read_to_string("rom:/difficulty.toml")
         .map(|f| toml::de::from_str(&f).unwrap_or_default())
         .unwrap_or_default();
     CONFIG.set(config).unwrap();

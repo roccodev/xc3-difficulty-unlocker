@@ -57,7 +57,7 @@ rage-strikes = false
 # Value multiplied to the chance to inflict reactions. 
 # [25->250%, increments of 25]
 # Easy: 125%, Normal: 100%, Hard: 75%, Very Hard: 50%
-reaction-chance = 100
+interlink-level-buildup = 100
 # Enemy HP multiplier. 
 # [25->250%, increments of 25]
 # Easy: 75%, Normal: 100%, Hard: 125%, Very Hard: 125%

@@ -15,7 +15,7 @@ Additionally, it also allows you to select the hidden "Very Hard" difficulty tha
 
 ## Configuration
 By default, the mod changes Hard difficulty to Very Hard.  
-You can edit the `/atmosphere/contents/010074f013262000/romfs/difficulty/config.toml` file to customize the settings to your liking.
+You can edit the `/atmosphere/contents/010074f013262000/romfs/difficulty.toml` file to customize the settings to your liking.
 
 Here are the default values for each difficulty:
 
@@ -31,7 +31,7 @@ Here are the default values for each difficulty:
 | Healing power multiplier | 100% | **100%** | 75% | 50% | 25->250%, x10 |
 | Chain attack damage ratio multiplier | 100% | **100%** | 50% | 50% | 25->250%, x10 |
 | Rage clears chain gauge on next attack | -- | -- | -- | On | On/Off |
-| Reaction chance multiplier | 125% | **100%** | 75% | 50% | 25->250%, x10 |
+| Interlink level buildup speed | 125% | **100%** | 75% | 50% | 25->250%, x10 |
 | Interlink heat buildup speed | 75% | **100%** | 125% | 125% | 25->250%, x10 |
 
 ## License

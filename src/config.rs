@@ -37,7 +37,7 @@ pub struct CustomConfig {
     pub player_healing: u32,
     pub chain_damage_ratio: u32,
     pub rage_strikes: bool,
-    pub reaction_chance: u32,
+    pub interlink_level_buildup: u32,
     pub interlink_heat_buildup: u32,
 }
 
@@ -77,7 +77,7 @@ impl Default for CustomConfig {
             player_healing: 100,
             chain_damage_ratio: 100,
             rage_strikes: false,
-            reaction_chance: 100,
+            interlink_level_buildup: 100,
             interlink_heat_buildup: 100,
         }
     }
