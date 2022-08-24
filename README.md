@@ -30,7 +30,7 @@ Here are the default values for each difficulty:
 | Talent art buildup speed | 100% | **100%** | 75% | 50% | 25->250%, x10 |
 | Healing power multiplier | 100% | **100%** | 75% | 50% | 25->250%, x10 |
 | Chain attack damage ratio multiplier | 100% | **100%** | 50% | 50% | 25->250%, x10 |
-| Unknown Rage mechanic | -- | -- | -- | On | On/Off |
+| Rage clears chain gauge on next attack | -- | -- | -- | On | On/Off |
 | Reaction chance multiplier | 125% | **100%** | 75% | 50% | 25->250%, x10 |
 | Interlink heat buildup speed | 75% | **100%** | 125% | 125% | 25->250%, x10 |
 

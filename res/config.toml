@@ -3,6 +3,10 @@
 enabled = true 
 # What difficulty to overwrite, one of "easy", "normal", or "hard"
 overwrite = "hard"
+# Whether enemy health should be updated to the Very Hard setting (200%).
+# If this is set to false, enemies will have health values from the overwritten
+# difficulty.
+health = true
 
 # Custom settings. When enabled, the settings will apply no matter
 # the difficulty. Make sure to disable this if you want to play
