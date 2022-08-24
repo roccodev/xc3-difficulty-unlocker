@@ -1,0 +1,22 @@
+[package]
+name = "xc3-difficulty-unlocker"
+version = "0.1.0"
+authors = ["RoccoDev <hey@rocco.dev>"]
+edition = "2021"
+license = "gpl-3.0"
+
+[package.metadata.skyline]
+titleid = "010074F013262000" # Xenoblade Chronicles 3
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true

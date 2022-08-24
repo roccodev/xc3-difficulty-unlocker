@@ -1,0 +1,60 @@
+[veryhard]
+# Whether the "Very Hard" mode should be enabled
+enabled = true 
+# What difficulty to overwrite, one of "easy", "normal", or "hard"
+overwrite = "hard"
+
+# Custom settings. When enabled, the settings will apply no matter
+# the difficulty. Make sure to disable this if you want to play
+# on very hard.
+[custom]
+# Whether custom mode should be enabled
+enabled = false
+# Enemy damage multiplier.
+# [25->250%, increments of 25]
+# Easy: 75%, Normal: 100%, Hard: 125%, Very Hard: 125%
+enemy-attack-power = 100
+# How fast enemies recharge arts.
+# [25->250%, increments of 25]
+# Easy: 75%, Normal: 100%, Hard: 125%, Very Hard: 125%
+enemy-recharge-speed = 100
+# Enemy HP multiplier.
+# [25->250%, increments of 25]
+# Easy: 50%, Normal: 100%, Hard: 150%, Very Hard: 200%
+enemy-health = 100
+# Multiplier for enemy resistance to debuff effects. 
+# [25->250%, increments of 25]
+# Easy: 50%, Normal: 100%, Hard: 150%, Very Hard: 200%
+enemy-debuff-resist = 100
+# Multiplier for the duration of combos. 
+# [25->250%, increments of 25]
+# Easy: 100%, Normal: 100%, Hard: 75%, Very Hard: 75%
+combo-duration = 100
+# Chain attack gauge buildup multiplier. 
+# [25->250%, increments of 25]
+# Easy: 150%, Normal: 100%, Hard: 75%, Very Hard: 50%
+chain-attack-buildup = 100
+# Talent art gauge buildup multiplier. 
+# [25->250%, increments of 25]
+# Easy: 100%, Normal: 100%, Hard: 75%, Very Hard: 50%
+talent-buildup = 100
+# Player healing power multiplier. 
+# [25->250%, increments of 25]
+# Easy: 100%, Normal: 100%, Hard: 75%, Very Hard: 50%
+player-healing = 100
+# Multiplier for each chain attack damage ratio increase. 
+# [25->250%, increments of 25]
+# Easy: 50%, Normal: 100%, Hard: 50%, Very Hard: 50%
+chain-damage-ratio = 100
+# Special attacks on enrage that cause the chain attack gauge to deplete. 
+# [true or false]
+# Very Hard: true
+rage-strikes = false
+# Value multiplied to the chance to inflict reactions. 
+# [25->250%, increments of 25]
+# Easy: 125%, Normal: 100%, Hard: 75%, Very Hard: 50%
+reaction-chance = 100
+# Enemy HP multiplier. 
+# [25->250%, increments of 25]
+# Easy: 75%, Normal: 100%, Hard: 125%, Very Hard: 125%
+interlink-heat-buildup = 100
