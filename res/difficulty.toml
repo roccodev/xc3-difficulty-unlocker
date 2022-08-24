@@ -1,16 +1,24 @@
+[overrides]
+# What difficulty should be replaced by Very Hard.
+# When the current difficulty is Very Hard, enemies will have a "+" next to their level.
+# Note: if Very Hard is disabled, this setting has no effect.
+# One of "easy", "normal", or "hard"
+veryhard = "hard"
+# What difficulty should be replaced by Custom.
+# When the current difficulty is Custom, enemies will have a "-" next to their level.
+# Note: if Custom is disabled (it is disabled by default!), this setting has no effect.
+# One of "easy", "normal", or "hard"
+custom = "easy"
+
 [veryhard]
 # Whether the "Very Hard" mode should be enabled
 enabled = true 
-# What difficulty to overwrite, one of "easy", "normal", or "hard"
-overwrite = "hard"
 # Whether enemy health should be updated to the Very Hard setting (200%).
-# If this is set to false, enemies will have health values from the overwritten
+# If this is set to false, enemies will have health values from the overridden
 # difficulty.
 health = true
 
-# Custom settings. When enabled, the settings will apply no matter
-# the difficulty. Make sure to disable this if you want to play
-# on very hard.
+# Custom settings. By default, this replaces the Easy difficulty.
 [custom]
 # Whether custom mode should be enabled
 enabled = false

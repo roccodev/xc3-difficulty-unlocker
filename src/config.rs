@@ -1,25 +1,33 @@
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "lowercase")]
 pub enum Difficulty {
     Normal = 0,
     Easy = 1,
     Hard = 2,
     VeryHard = 3,
+    Custom = 4,
 }
 
 #[derive(Debug, Deserialize, Default)]
 pub struct Config {
+    pub overrides: OverrideConfig,
     #[serde(rename = "veryhard")]
     pub very_hard: VeryHardConfig,
     pub custom: CustomConfig,
 }
 
 #[derive(Debug, Deserialize)]
+pub struct OverrideConfig {
+    #[serde(rename = "veryhard")]
+    pub very_hard: Difficulty,
+    pub custom: Difficulty,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct VeryHardConfig {
     pub enabled: bool,
-    pub overwrite: Difficulty,
     pub health: bool,
 }
 
@@ -48,6 +56,7 @@ impl From<u32> for Difficulty {
             1 => Self::Easy,
             2 => Self::Hard,
             3 => Self::VeryHard,
+            4 => Self::Custom,
             n => panic!("Unknown difficulty ID {}", n),
         }
     }
@@ -57,8 +66,17 @@ impl Default for VeryHardConfig {
     fn default() -> Self {
         Self {
             enabled: true,
-            overwrite: Difficulty::Hard,
+
             health: true,
+        }
+    }
+}
+
+impl Default for OverrideConfig {
+    fn default() -> Self {
+        Self {
+            very_hard: Difficulty::Hard,
+            custom: Difficulty::Easy,
         }
     }
 }
