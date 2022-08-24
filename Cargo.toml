@@ -10,6 +10,7 @@ titleid = "010074F013262000" # Xenoblade Chronicles 3
 package-resources = [
     { local = "res/difficulty.toml", package = "/atmosphere/contents/010074F013262000/romfs/difficulty.toml" }
 ]
+custom-npdm = "res/npdm/xc3.npdm"
 
 [lib]
 crate-type = ["cdylib"]
