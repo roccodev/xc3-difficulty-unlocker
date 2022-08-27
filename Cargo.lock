@@ -11,7 +11,7 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 [[package]]
 name = "libc-nnsdk"
 version = "0.0.1"
-source = "git+https://github.com/ultimate-research/libc-nnsdk.git#98c11e074317f2b45b6387840ff3c391275f4ad5"
+source = "git+https://github.com/ultimate-research/libc-nnsdk.git#a2b8a5b096e35151927d43ca6eb053da353aa8c6"
 
 [[package]]
 name = "nnsdk"
