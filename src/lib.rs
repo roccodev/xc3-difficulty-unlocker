@@ -27,7 +27,7 @@ const OPTION_OFFSETS: [isize; 11] = [
     0x168, 0x16c, 0x170, 0x174, 0x178, 0x17c, 0x180, 0x184, 0x190, 0x188, 0x18c,
 ];
 
-#[hook(offset = 0x0018f14c, inline)]
+#[hook(offset = 0x0019565c, inline)]
 unsafe fn load_set_difficulty_hook(ctx: &mut InlineCtx) {
     let current_difficulty = *ctx.registers[20].w.as_ref();
 
@@ -39,7 +39,7 @@ unsafe fn load_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x0018f350, inline)]
+#[hook(offset = 0x001958b0, inline)]
 unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
@@ -72,7 +72,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     *ctx.registers[20].w.as_mut() = real_difficulty as u32;
 }
 
-#[hook(offset = 0x0026b5a8, inline)]
+#[hook(offset = 0x002d6774, inline)]
 unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     if config.very_hard.health {
@@ -80,20 +80,20 @@ unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x0026b5e8, inline)]
+#[hook(offset = 0x002d67c8, inline)]
 unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
     if custom.enabled && REAL_DIFFICULTY.load(Ordering::Acquire) == config.overrides.custom as u8 {
-        let original_health = *ctx.registers[20].w.as_ref();
+        let original_health = *((ctx.registers[8].x.as_ref() + 0x28) as *const u32);
 
         // Game performs the same lossy cast
-        *ctx.registers[8].w.as_mut() =
+        *ctx.registers[9].w.as_mut() =
             (original_health as f32 * percent_multiple_of_25(custom.enemy_health)) as u32;
     }
 }
 
-#[hook(offset = 0x005e8084, inline)]
+#[hook(offset = 0x0070c660, inline)] // rect_TextEnemyLvNo
 unsafe fn level_text(ctx: &mut InlineCtx) {
     // This adds a "+" next to the enemy's level if the difficulty is Very Hard,
     // or a "-" if custom settings are applied.
