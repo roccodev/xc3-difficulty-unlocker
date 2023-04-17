@@ -85,7 +85,7 @@ unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
     if custom.enabled && REAL_DIFFICULTY.load(Ordering::Acquire) == config.overrides.custom as u8 {
-        let original_health = *((ctx.registers[8].x.as_ref() + 0x28) as *const u32);
+        let original_health = *((ctx.registers[8].x.as_ref() + 0x20) as *const u32);
 
         // Game performs the same lossy cast
         *ctx.registers[9].w.as_mut() =
