@@ -36,6 +36,7 @@ Here are the default values for each difficulty:
 | Rage clears chain gauge on next attack | -- | -- | -- | On | On/Off |
 | Interlink level buildup speed | 125% | **100%** | 75% | 50% | 25->250%, x10 |
 | Interlink heat buildup speed | 75% | **100%** | 125% | 125% | 25->250%, x10 |
+| (DLC4) Pair special charge speed | 100% | **100%** | 75% | 50% | 25->250%, x10 |
 
 ## Build instructions
 To build the project, install [Rust](https://rustup.rs/) and run

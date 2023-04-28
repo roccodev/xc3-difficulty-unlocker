@@ -47,6 +47,7 @@ pub struct CustomConfig {
     pub rage_strikes: bool,
     pub interlink_level_buildup: u32,
     pub interlink_heat_buildup: u32,
+    pub dlc4_pair_special_buildup: u32,
 }
 
 impl From<u32> for Difficulty {
@@ -97,6 +98,7 @@ impl Default for CustomConfig {
             rage_strikes: false,
             interlink_level_buildup: 100,
             interlink_heat_buildup: 100,
+            dlc4_pair_special_buildup: 100,
         }
     }
 }

@@ -23,11 +23,11 @@ static LEVEL_TEMPLATES: [&[u8]; 2] = ["%d+\0".as_bytes(), "%d-\0".as_bytes()]; /
 static REAL_DIFFICULTY: AtomicU8 = AtomicU8::new(0);
 static CURRENT_DIFFICULTY: AtomicU8 = AtomicU8::new(0);
 
-const OPTION_OFFSETS: [isize; 11] = [
-    0x168, 0x16c, 0x170, 0x174, 0x178, 0x17c, 0x180, 0x184, 0x190, 0x188, 0x18c,
+const OPTION_OFFSETS: [isize; 12] = [
+    0x168, 0x16c, 0x170, 0x174, 0x178, 0x17c, 0x180, 0x184, 0x194, 0x188, 0x18c, 0x190,
 ];
 
-#[hook(offset = 0x0019565c, inline)]
+#[hook(offset = 0x00198aec, inline)]
 unsafe fn load_set_difficulty_hook(ctx: &mut InlineCtx) {
     let current_difficulty = *ctx.registers[20].w.as_ref();
 
@@ -39,7 +39,7 @@ unsafe fn load_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x001958b0, inline)]
+#[hook(offset = 0x00198d2c, inline)]
 unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
@@ -64,6 +64,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
         set_f32(7, custom.chain_damage_ratio);
         set_f32(9, custom.interlink_level_buildup);
         set_f32(10, custom.interlink_heat_buildup);
+        set_f32(11, custom.dlc4_pair_special_buildup);
 
         *(base_ptr.offset(OPTION_OFFSETS[8])) = custom.rage_strikes as u8;
     }
@@ -72,7 +73,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     *ctx.registers[20].w.as_mut() = real_difficulty as u32;
 }
 
-#[hook(offset = 0x002d6774, inline)]
+#[hook(offset = 0x002e81c0, inline)]
 unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     if config.very_hard.health {
@@ -80,7 +81,7 @@ unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x002d67c8, inline)]
+#[hook(offset = 0x002e8214, inline)]
 unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
@@ -93,7 +94,7 @@ unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x0070c660, inline)] // rect_TextEnemyLvNo
+#[hook(offset = 0x0077b6c4, inline)] // rect_TextEnemyLvNo
 unsafe fn level_text(ctx: &mut InlineCtx) {
     // This adds a "+" next to the enemy's level if the difficulty is Very Hard,
     // or a "-" if custom settings are applied.
