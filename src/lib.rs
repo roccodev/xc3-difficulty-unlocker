@@ -73,7 +73,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     *ctx.registers[20].w.as_mut() = real_difficulty as u32;
 }
 
-#[hook(offset = 0x002e81c0, inline)]
+#[hook(offset = 0x002e81d0, inline)]
 unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     if config.very_hard.health {
@@ -81,7 +81,7 @@ unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x002e8214, inline)]
+#[hook(offset = 0x002e8224, inline)]
 unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
@@ -94,7 +94,7 @@ unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x0077b6c4, inline)] // rect_TextEnemyLvNo
+#[hook(offset = 0x0077b744, inline)] // rect_TextEnemyLvNo
 unsafe fn level_text(ctx: &mut InlineCtx) {
     // This adds a "+" next to the enemy's level if the difficulty is Very Hard,
     // or a "-" if custom settings are applied.

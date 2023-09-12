@@ -27,7 +27,7 @@ Here are the default values for each difficulty:
 | Enemy attack power | 75% | **100%** | 125% | 125% | 25->250%, x10
 | Enemy recharge speed | 75% | **100%** | 100% | 125% | 25->250%, x10 |
 | Enemy HP | 50% | **100%** | 150% | 200% | 25->250%, x10 |
-| Debuff resistance multiplier | 50% | **100%** | 150% | 200% | 25->250%, x10 |
+| Debuff duration from enemies | 50% | **100%** | 150% | 200% | 25->250%, x10 |
 | Combo duration multiplier | 100% | **100%** | 75% | 75% | 25->250%, x10 |
 | Chain attack gauge buildup | 150% | **100%** | 75% | 50% | 25->250%, x10 |
 | Talent art buildup speed | 100% | **100%** | 75% | 50% | 25->250%, x10 |

@@ -34,7 +34,7 @@ enemy-recharge-speed = 100
 # [25->250%, increments of 25]
 # Easy: 50%, Normal: 100%, Hard: 150%, Very Hard: 200%
 enemy-health = 100
-# Multiplier for enemy resistance to debuff effects. 
+# Multiplier for duration of debuff effects from enemies. 
 # [25->250%, increments of 25]
 # Easy: 50%, Normal: 100%, Hard: 150%, Very Hard: 200%
 enemy-debuff-resist = 100
