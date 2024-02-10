@@ -1,13 +1,7 @@
 #![feature(once_cell)]
-#![feature(cstr_from_bytes_until_nul)]
 
 use config::Difficulty;
-use skyline::{
-    hook,
-    hooks::InlineCtx,
-    nn::{self, oe::DisplayVersion},
-};
-use std::ffi::CStr;
+use skyline::{hook, hooks::InlineCtx};
 use std::sync::{
     atomic::{AtomicU8, Ordering},
     OnceLock,
@@ -73,7 +67,7 @@ unsafe fn load_replace_options_hook(ctx: &mut InlineCtx) {
     *ctx.registers[20].w.as_mut() = real_difficulty as u32;
 }
 
-#[hook(offset = 0x002e81d0, inline)]
+#[hook(offset = 0x002e81f0, inline)]
 unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     if config.very_hard.health {
@@ -81,7 +75,7 @@ unsafe fn hp_set_difficulty_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x002e8224, inline)]
+#[hook(offset = 0x002e8244, inline)]
 unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     let config = get_config();
     let custom = &config.custom;
@@ -94,7 +88,7 @@ unsafe fn hp_replace_hook(ctx: &mut InlineCtx) {
     }
 }
 
-#[hook(offset = 0x0077b744, inline)] // rect_TextEnemyLvNo
+#[hook(offset = 0x0077c294, inline)] // rect_TextEnemyLvNo
 unsafe fn level_text(ctx: &mut InlineCtx) {
     // This adds a "+" next to the enemy's level if the difficulty is Very Hard,
     // or a "-" if custom settings are applied.
@@ -112,22 +106,6 @@ unsafe fn level_text(ctx: &mut InlineCtx) {
 #[skyline::main(name = "xc3_difficulty_unlocker")]
 pub fn main() {
     println!("[XC3-DU] Loading...");
-
-    let mut game_ver: DisplayVersion = DisplayVersion { name: [0; 16] };
-    unsafe {
-        nn::oe::GetDisplayVersion(&mut game_ver as *mut _);
-    }
-    let build_ver = env!("XC3_VER");
-    match CStr::from_bytes_until_nul(&game_ver.name).map(|s| s.to_string_lossy()) {
-        Ok(s) if s == build_ver => {}
-        r => {
-            println!(
-                "[XC3-DU] Version mismatch! (Built for {}, got {:?}) Unloading...",
-                build_ver, r
-            );
-            return;
-        }
-    }
 
     let config = std::fs::read_to_string("rom:/difficulty.toml")
         .map(|f| toml::de::from_str(&f).unwrap_or_default())
